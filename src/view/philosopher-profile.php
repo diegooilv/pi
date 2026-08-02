@@ -41,7 +41,7 @@ $name = $p['name'] ?? 'Filósofo';
                 <h2 class="philosophers__info-card-title">Sobre as Informações</h2>
                 <p class="philosophers__info-card-text">
                     Todos os textos foram elaborados com base em fontes públicas disponíveis na internet, com o apoio de
-                    inteligência artificial. 
+                    inteligência artificial.
                     <br>
                     As informações podem conter imprecisões ou estar desatualizadas.
                     <br>
@@ -53,7 +53,7 @@ $name = $p['name'] ?? 'Filósofo';
                     </a>
                     <br>
                     <br>
-                    Encontrou algum erro ou a página não existe? <a href="#">Entre em contato</a>.
+                    Encontrou algum erro ou a página não existe? <a href="/contact">Entre em contato</a>.
                 </p>
             </div>
             <nav class="philosophers-profile__breadcrumb" aria-label="breadcrumb">

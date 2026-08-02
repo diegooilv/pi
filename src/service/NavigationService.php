@@ -3,6 +3,10 @@ class NavigationService
 {
     private const MENUS = [
         'guest' => [
+            'contact' => [
+                'Início' => '/',
+                'Filosofos' => '/philosophers'
+            ],
             'home' => [
                 'Início' => '/',
                 'Filosofos' => '/philosophers',
