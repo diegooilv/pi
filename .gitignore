@@ -2,3 +2,4 @@ spam/
 src/vendor/
 .env
 logs/
+docker/ssl/*
