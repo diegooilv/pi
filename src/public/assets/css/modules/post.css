@@ -78,16 +78,16 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-	transition: 1.2s;
+    transition: 1.2s;
 }
 
 .post-author-img:hover {
-	transform: rotate(360deg) scale(1.08);
+    transform: rotate(360deg) scale(1.08);
 }
 
 .post-author-name {
     font-size: 15px;
-	transition: 0.3s;
+    transition: 0.3s;
 }
 
 .post-btn-report {
@@ -101,7 +101,7 @@
 
 .post-btn-report:hover {
     opacity: .8;
-	transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .post-author-link {
@@ -117,7 +117,7 @@
 }
 
 .post-author-name:hover {
-	color: #E8C48C;
+    color: #E8C48C;
 }
 
 @media (max-width: 768px) {
@@ -149,4 +149,149 @@
         width: 36px;
         height: 36px;
     }
+}
+
+.post-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-bottom: 20px;
+}
+
+.post-field {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.post-field label {
+    font-family: var(--font-alt);
+    font-size: .85rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: .85;
+}
+
+.post-field input,
+.post-field textarea,
+.post-field select {
+    background: var(--surface);
+    border: 1px solid rgba(213, 162, 93, .25);
+    border-radius: 4px;
+    padding: .65rem .85rem;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    width: 100%;
+}
+
+.post-field input::placeholder,
+.post-field textarea::placeholder {
+    color: var(--text);
+    opacity: .3;
+}
+
+.post-field input:focus,
+.post-field textarea:focus,
+.post-field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(213, 162, 93, .12);
+}
+
+.post-field textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+}
+
+.post-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F4E9D8'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right .85rem center;
+    padding-right: 2.25rem;
+}
+
+.post-field select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.post-field input[type="file"] {
+    padding: .5rem .75rem;
+    cursor: pointer;
+    font-size: .95rem;
+    opacity: .75;
+}
+
+.post-field input[type="file"]::-webkit-file-upload-button {
+    background: transparent;
+    border: 1px solid rgba(213, 162, 93, .4);
+    border-radius: 3px;
+    color: var(--accent);
+    font-family: var(--font-alt);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .3rem .7rem;
+    margin-right: .75rem;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+}
+
+.post-field input[type="file"]::-webkit-file-upload-button:hover {
+    border-color: var(--accent);
+    color: var(--accent-hover);
+}
+
+.post-image-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.post-preview {
+    display: none;
+    width: 80px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.post-preview[src]:not([src=""]) {
+    display: block;
+}
+
+.post-submit {
+    margin-top: .5rem;
+    padding: .8rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: var(--font-title);
+    font-size: .9rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.post-submit:hover {
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.post-submit:active {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.post-submit:disabled {
+    opacity: .5;
+    cursor: not-allowed;
 }

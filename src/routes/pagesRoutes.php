@@ -24,4 +24,6 @@ $router->get('/philosophers/{name}', [Philosophers::class, 'philosophersProfile'
 $router->get('/contact', [ContactController::class, 'index']);
 $router->post('/contact', [ContactController::class, 'form']);
 
+$router->get('/posts/create', [PostController::class, 'index']);
+
 return $router;

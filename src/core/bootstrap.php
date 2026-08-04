@@ -39,6 +39,7 @@ require_once __DIR__ . '/../controller/ChatBotController.php';
 require_once __DIR__ . '/../controller/UserPageController.php';
 require_once __DIR__ . '/../controller/Philosophers.php';
 require_once __DIR__ . '/../controller/ContactController.php';
+require_once __DIR__ . '/../controller/PostController.php';
 
 
 // Services

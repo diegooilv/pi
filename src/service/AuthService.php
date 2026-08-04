@@ -35,9 +35,6 @@ class AuthService
 
         $user = $this->userModel->findByEmail($email);
 
-        var_dump($user);
-        var_dump($password);
-
         if (!$user) {
             die("USER NOT FOUND");
         }
