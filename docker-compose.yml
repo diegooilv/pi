@@ -147,6 +147,23 @@ services:
     networks:
       - sophia
 
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH: "${MAIL_USER}:${MAIL_PASS}"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "true"
+      MP_DATABASE: /data/mailpit.db
+      TZ: America/Sao_Paulo
+    volumes:
+      - ./data:/data
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+    - sophia
+
 volumes:
   sophia_db:
 

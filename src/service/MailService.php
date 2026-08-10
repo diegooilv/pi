@@ -13,8 +13,9 @@ class Mailer
 
         $this->mail = new PHPMailer(true);
         $this->mail->isSMTP();
-        $this->mail->SMTPDebug = 2;
-        $this->mail->Debugoutput = 'echo';
+        // 2
+        $this->mail->SMTPDebug = 0;
+        // $this->mail->Debugoutput = 'echo';
         $this->mail->Host = $config['host'];
         $this->mail->Port = $config['port'];
         $this->mail->SMTPAuth = true;
