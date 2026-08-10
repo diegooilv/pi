@@ -40,7 +40,8 @@ require_once __DIR__ . '/../controller/UserPageController.php';
 require_once __DIR__ . '/../controller/Philosophers.php';
 require_once __DIR__ . '/../controller/ContactController.php';
 require_once __DIR__ . '/../controller/PostController.php';
-
+require_once __DIR__ . '/../controller/ProfileController.php';
+require_once __DIR__ . '/../controller/LogoutController.php';
 
 // Services
 require_once __DIR__ . '/../service/ErrorService.php';

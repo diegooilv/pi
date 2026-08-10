@@ -26,4 +26,8 @@ $router->post('/contact', [ContactController::class, 'form']);
 
 $router->get('/posts/create', [PostController::class, 'index']);
 
+$router->get('/profile', [ProfileController::class, 'index']);
+
+$router->get('/logout', [LogoutController::class, 'index']);
+
 return $router;
