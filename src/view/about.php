@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <title>Sophia - Sobre</title>
+    <title>Noesis - Sobre</title>
 </head>
 
 <?= renderHeader($navItems) ?>
 <main class="about">
 
     <section class="about__hero">
-        <h2>Sobre a Sophia</h2>
+        <h2>Sobre a Noesis</h2>
         <p>
-            A Sophia é uma plataforma acadêmica de filosofia desenvolvida como projeto de conclusão
+            A Noesis é uma plataforma acadêmica de filosofia desenvolvida como projeto de conclusão
             no <strong>Instituto Federal do Rio Grande do Sul — IFRS</strong>. Nasceu da necessidade
             de reunir, em um só lugar, textos filosóficos, materiais de estudo e debates orientados
             por professores, tornando o conhecimento acessível a todos os estudantes.
@@ -80,7 +80,7 @@
         <div>
             <h3>Instituto Federal do Rio Grande do Sul</h3>
             <p>
-                A Sophia foi desenvolvida no IFRS como projeto acadêmico, unindo o ensino técnico
+                A Noesis foi desenvolvida no IFRS como projeto acadêmico, unindo o ensino técnico
                 de desenvolvimento de sistemas com a tradição filosófica do currículo humanístico
                 da instituição.
             </p>

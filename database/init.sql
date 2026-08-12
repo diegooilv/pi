@@ -1,11 +1,11 @@
 -- --------------------------------------------------------
--- Sophia – Database Init
+-- Noesis – Database Init
 -- --------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS sophia CHARACTER
+CREATE DATABASE IF NOT EXISTS noesis CHARACTER
 SET
     utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE sophia;
+USE noesis;
 
 -- --------------------------------------------------------
 -- Tables
@@ -102,7 +102,7 @@ VALUES
     (
         'Diego',
         'diegooilv',
-        'diegooilv@sophia.filosofia',
+        'diegooilv@noesis.filosofia',
         '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         'admin'
     );

@@ -6,7 +6,7 @@ function renderHeader(
     string $aClass = "header-link"
 ) {
     $html = "<header class='header'>";
-    $html .= "<a href='/' class='header-image'><img src='/assets/sophia.png' alt='Logo do Site'></a>";
+    $html .= "<a href='/' class='header-image'><img src='/assets/noesis.png' alt='Logo do Site'></a>";
     $html .= "<ul class='{$ulClass}'>";
 
     foreach ($items as $text => $item) {

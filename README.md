@@ -1,14 +1,14 @@
-# Φ Sophia — Plataforma de Filosofia
+# Φ Noesis — Plataforma de Filosofia
 
 > Um espaço para reflexão, debate e acesso ao pensamento filosófico em português.
 
-A filosofia é pouco acessível no Brasil — o conteúdo de qualidade está disperso em livros caros, canais desconexos ou em inglês. Sophia busca reunir produção autoral e curadoria de materiais filosóficos em um só lugar, criando uma comunidade acessível para estudantes, autodidatas e entusiastas.
+A filosofia é pouco acessível no Brasil — o conteúdo de qualidade está disperso em livros caros, canais desconexos ou em inglês. Noesis busca reunir produção autoral e curadoria de materiais filosóficos em um só lugar, criando uma comunidade acessível para estudantes, autodidatas e entusiastas.
 
 ---
 
 ## Sobre o Projeto
 
-Sophia é uma plataforma web onde usuários podem publicar reflexões e textos filosóficos, além de descobrir e compartilhar materiais de estudo — sejam digitais (PDFs, links) ou indicações de onde encontrar e comprar materiais físicos.
+Noesis é uma plataforma web onde usuários podem publicar reflexões e textos filosóficos, além de descobrir e compartilhar materiais de estudo — sejam digitais (PDFs, links) ou indicações de onde encontrar e comprar materiais físicos.
 
 ### Perfis de acesso
 

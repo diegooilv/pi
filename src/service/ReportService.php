@@ -34,7 +34,7 @@ class ReportService
             1,
             "Diego",
             "diegooilv",
-            "diego@sophia.com",
+            "diego@noesis.com",
             "password",
             "oioi",
             "/assets/users/diego.png",

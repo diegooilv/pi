@@ -30,7 +30,7 @@ class ChatBotController extends Controller
         $pergunta = trim($_POST['prompt'] ?? '');
 
         if (empty($pergunta)) {
-            header('Location: /sophia');
+            header('Location: /noesis');
             exit;
         }
 

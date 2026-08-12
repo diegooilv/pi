@@ -1,4 +1,4 @@
-.sophia-ia {
+.noesis-ia {
     max-width: 900px;
     margin: 48px auto;
     padding: 32px;
@@ -7,7 +7,7 @@
     border-radius: 24px;
 }
 
-.sophia-ia__header {
+.noesis-ia__header {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -16,7 +16,7 @@
     border-bottom: 1px solid rgba(213, 162, 93, 0.15);
 }
 
-.sophia-ia__avatar {
+.noesis-ia__avatar {
     width: 52px;
     height: 52px;
     border-radius: 50%;
@@ -31,7 +31,7 @@
     flex-shrink: 0;
 }
 
-.sophia-ia__avatar--small {
+.noesis-ia__avatar--small {
     width: 34px;
     height: 34px;
     font-size: 15px;
@@ -39,13 +39,13 @@
     margin-top: 4px;
 }
 
-.sophia-ia__avatar img {
+.noesis-ia__avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.sophia-ia__title {
+.noesis-ia__title {
     margin: 0;
     color: var(--text);
     font-family: var(--font-title);
@@ -53,7 +53,7 @@
     font-weight: 600;
 }
 
-.sophia-ia__subtitle {
+.noesis-ia__subtitle {
     color: var(--accent);
     font-size: 0.85rem;
     letter-spacing: 0.12em;
@@ -61,7 +61,7 @@
     font-family: var(--font-body);
 }
 
-.sophia-ia__chat {
+.noesis-ia__chat {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -69,17 +69,17 @@
     margin-bottom: 32px;
 }
 
-.sophia-ia__message {
+.noesis-ia__message {
     display: flex;
     gap: 12px;
     align-items: flex-start;
 }
 
-.sophia-ia__message--user {
+.noesis-ia__message--user {
     justify-content: flex-end;
 }
 
-.sophia-ia__message--user .sophia-ia {
+.noesis-ia__message--user .noesis-ia {
     background: rgba(213, 162, 93, 0.12);
     border: 1px solid rgba(213, 162, 93, 0.2);
     color: var(--text);
@@ -92,8 +92,8 @@
     line-height: 1.7;
 }
 
-.sophia-ia__message--system .sophia-ia,
-.sophia-ia__message--sophia .sophia-ia__response .sophia-ia {
+.noesis-ia__message--system .noesis-ia,
+.noesis-ia__message--noesis .noesis-ia__response .noesis-ia {
     background: rgba(11, 20, 36, 0.35);
     border: 1px solid rgba(213, 162, 93, 0.15);
     color: var(--text);
@@ -105,49 +105,49 @@
     line-height: 1.8;
 }
 
-.sophia-ia__response {
+.noesis-ia__response {
     overflow-wrap: break-word;
     word-break: break-word;
     line-height: 1.8;
 }
 
-.sophia-ia__response * {
+.noesis-ia__response * {
     max-width: 100%;
     box-sizing: border-box;
 }
 
-.sophia-ia__response p.sophia-ia {
+.noesis-ia__response p.noesis-ia {
     margin: 0 0 12px;
 }
 
-.sophia-ia__response p.sophia-ia:last-child {
+.noesis-ia__response p.noesis-ia:last-child {
     margin-bottom: 0;
 }
 
-.sophia-ia__response ul.sophia-ia {
+.noesis-ia__response ul.noesis-ia {
     margin: 12px 0;
 }
 
-.sophia-ia__response li.sophia-ia {
+.noesis-ia__response li.noesis-ia {
     margin-bottom: 8px;
 }
 
-.sophia-ia__response blockquote.sophia-ia {
+.noesis-ia__response blockquote.noesis-ia {
     margin: 16px 0;
 }
 
-.sophia-ia__response strong.sophia-ia,
-.sophia-ia__response em.sophia-ia {
+.noesis-ia__response strong.noesis-ia,
+.noesis-ia__response em.noesis-ia {
     display: inline;
 }
 
-.sophia-ia__response br {
+.noesis-ia__response br {
     display: block;
     content: "";
     margin-top: 6px;
 }
 
-.sophia-ia__form {
+.noesis-ia__form {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -158,12 +158,12 @@
     transition: 0.2s ease;
 }
 
-.sophia-ia__form:focus-within {
+.noesis-ia__form:focus-within {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(213, 162, 93, 0.08);
 }
 
-.sophia-ia__input {
+.noesis-ia__input {
     flex: 1;
     border: none;
     background: transparent;
@@ -173,11 +173,11 @@
     font-size: 1.15rem;
 }
 
-.sophia-ia__input::placeholder {
+.noesis-ia__input::placeholder {
     color: rgba(244, 233, 216, 0.55);
 }
 
-.sophia-ia__button {
+.noesis-ia__button {
     width: 42px;
     height: 42px;
     border: none;
@@ -191,17 +191,17 @@
     transition: 0.2s ease;
 }
 
-.sophia-ia__button:hover {
+.noesis-ia__button:hover {
     background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
-.sophia-ia__button-icon {
+.noesis-ia__button-icon {
     width: 18px;
     height: 18px;
 }
 
-.sophia-ia__disclaimer {
+.noesis-ia__disclaimer {
     display: flex;
     gap: 12px;
     align-items: flex-start;
@@ -212,7 +212,7 @@
     border: 1px solid rgba(213, 162, 93, 0.15);
 }
 
-.sophia-ia__disclaimer-icon {
+.noesis-ia__disclaimer-icon {
     width: 18px;
     height: 18px;
     color: var(--accent);
@@ -220,7 +220,7 @@
     margin-top: 2px;
 }
 
-.sophia-ia__disclaimer strong {
+.noesis-ia__disclaimer strong {
     display: block;
     color: var(--accent);
     font-family: var(--font-body);
@@ -228,29 +228,29 @@
     margin-bottom: 4px;
 }
 
-.sophia-ia__disclaimer span {
+.noesis-ia__disclaimer span {
     display: block;
     color: rgba(244, 233, 216, 0.75);
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
-.sophia-ia__disclaimer {
+.noesis-ia__disclaimer {
     margin-bottom: 16px;
 }
 
 @media (max-width: 768px) {
-    .sophia-ia {
+    .noesis-ia {
         margin: 24px 16px;
         padding: 24px;
     }
 
-    .sophia-ia__message--user .sophia-ia,
-    .sophia-ia__response {
+    .noesis-ia__message--user .noesis-ia,
+    .noesis-ia__response {
         max-width: 100%;
     }
 
-    .sophia-ia__title {
+    .noesis-ia__title {
         font-size: 1.6rem;
     }
 }

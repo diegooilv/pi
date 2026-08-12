@@ -1,8 +1,8 @@
-# Diagrama - Sophia
+# Diagrama - Noesis
 
 ## Sumário
 
-- [Diagrama - Sophia](#diagrama---sophia)
+- [Diagrama - Noesis](#diagrama---noesis)
   - [Sumário](#sumário)
   - [Introdução](#introdução)
     - [Tipo de banco](#tipo-de-banco)
