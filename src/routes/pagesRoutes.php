@@ -30,4 +30,6 @@ $router->get('/profile', [ProfileController::class, 'index']);
 
 $router->get('/logout', [LogoutController::class, 'index']);
 
+$router->get('/dashboard', [DashboardController::class, 'index']);
+
 return $router;
