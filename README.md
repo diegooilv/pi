@@ -1,62 +1,27 @@
-# Φ Noesis — Plataforma de Filosofia
+# Front-End do Projeto
 
-> Um espaço para reflexão, debate e acesso ao pensamento filosófico em português.
+## Status Atual
 
-A filosofia é pouco acessível no Brasil — o conteúdo de qualidade está disperso em livros caros, canais desconexos ou em inglês. Noesis busca reunir produção autoral e curadoria de materiais filosóficos em um só lugar, criando uma comunidade acessível para estudantes, autodidatas e entusiastas.
+O front-end já está aproximadamente 95% concluído em relação ao site inicial planejado.
 
----
+## Pendências
 
-## Sobre o Projeto
+- [ ] Página de Criar Post
+- [ ] Página de Criar Material
+- [ ] Página de Denúncia
+- [ ] Layout da tela inicial mostrando como posts e materiais serão exibidos
+- [ ] Tela específica para cada material
+- [ ] Tela específica para cada post
 
-Noesis é uma plataforma web onde usuários podem publicar reflexões e textos filosóficos, além de descobrir e compartilhar materiais de estudo — sejam digitais (PDFs, links) ou indicações de onde encontrar e comprar materiais físicos.
+## Sobre a Estrutura de Páginas
 
-### Perfis de acesso
+A versão atual conta com **56 páginas**, sendo que **45 delas seguem a mesma estrutura**, variando apenas o filósofo apresentado. Essa escolha foi intencional: os conteúdos dos filósofos formam a base do projeto, então replicar o layout garante consistência entre eles.
 
-| Perfil | Descrição |
-|---|---|
-| **Visitante** | Navega e lê posts e materiais sem necessidade de cadastro |
-| **Usuário** | Publica posts, compartilha materiais e gerencia sua conta |
-| **Admin** | Modera conteúdo, gerencia usuários e categorias |
+## Próximos Passos
 
----
+O foco imediato é finalizar as páginas pendentes listadas acima. Também é possível que, durante esse processo, novas necessidades sejam identificadas.
 
-## Stack
+## Cronograma
 
-| Camada | Tecnologia |
-|---|---|
-| Backend | PHP |
-| Banco de dados | PostgreSQL ou MySQL (Será decidido em breve.) |
-| Frontend | HTML, CSS, JavaScript |
-| Containerização | Docker |
-| Versionamento | Git |
-
----
-
-## Estrutura do Projeto
-
-Em breve...
-
----
-
-## Como Rodar
-
-Em breve...
-
----
-
-## Banco de Dados
-
-Em breve...
-
----
-
-## Changelog
-
-### v0.0 — atual
-
-- Definição do tema e proposta do projeto
-- Esqueleto de páginas e fluxo de navegação
-
----
-
-*Projeto acadêmico desenvolvido ao longo do ano de 2026.*
+- **13/08** — "Criação" do front-end (branch atual) - Criação dos arquivos estáticos.
+- Com o adiamento da entrega em uma semana, esta branch deve receber melhorias adicionais.
