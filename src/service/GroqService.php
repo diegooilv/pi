@@ -12,7 +12,7 @@ class GroqService
         "tpm" => 12000,
         "tpd" => 100000
     ];
-    public function __construct(string $model = 'llama-3.3-70b-versatile')
+    public function __construct(string $model = 'openai/gpt-oss-120b')
     {
         $this->apiKey = trim(require __DIR__ . '/../config/groq.php');
         $this->model = $model;
