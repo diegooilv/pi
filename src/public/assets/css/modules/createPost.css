@@ -1,0 +1,155 @@
+.create-post {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.create-post__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 80%;
+    max-width: 500px;
+}
+
+.create-post__field {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.create-post__field label {
+    font-family: var(--font-alt);
+    font-size: .85rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: .85;
+}
+
+.create-post__field input,
+.create-post__field textarea,
+.create-post__field select {
+    background: var(--surface);
+    border: 1px solid rgba(213, 162, 93, .25);
+    border-radius: 4px;
+    padding: .65rem .85rem;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    width: 100%;
+}
+
+.create-post__field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d5a25d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right .85rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+}
+
+.create-post__field input::placeholder,
+.create-post__field textarea::placeholder {
+    color: var(--text);
+    opacity: .3;
+}
+
+.create-post__field input:focus,
+.create-post__field textarea:focus,
+.create-post__field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(213, 162, 93, .12);
+}
+
+.create-post__field textarea {
+    resize: vertical;
+    min-height: 250px;
+    line-height: 1.6;
+}
+
+.create-post__field input[type="file"] {
+    padding: .5rem .75rem;
+    cursor: pointer;
+    font-size: .95rem;
+    opacity: .75;
+}
+
+.create-post__field input[type="file"]::-webkit-file-upload-button {
+    background: transparent;
+    border: 1px solid rgba(213, 162, 93, .4);
+    border-radius: 3px;
+    color: var(--accent);
+    font-family: var(--font-alt);
+    font-size: .8rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .3rem .7rem;
+    margin-right: .75rem;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+}
+
+.create-post__field input[type="file"]::-webkit-file-upload-button:hover {
+    border-color: var(--accent);
+    color: var(--accent-hover);
+}
+
+.create-post__field.has-error input,
+.create-post__field.has-error textarea,
+.create-post__field.has-error select {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, .12);
+}
+
+.create-post__errors {
+    width: 80%;
+    max-width: 500px;
+    background: rgba(192, 57, 43, .08);
+    border: 1px solid rgba(192, 57, 43, .3);
+    border-radius: 4px;
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.create-post__errors ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #c0392b;
+    font-family: var(--font-body);
+    font-size: .95rem;
+}
+
+.create-post__form button[type="submit"] {
+    margin-top: .5rem;
+    padding: .8rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: var(--font-title);
+    font-size: .9rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.create-post__form button[type="submit"]:hover {
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.create-post__form button[type="submit"]:active {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.create-post__form button[type="submit"]:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}

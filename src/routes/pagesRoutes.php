@@ -32,4 +32,7 @@ $router->get('/logout', [LogoutController::class, 'index']);
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
 
+$router->get('/create-post', [PostController::class, 'index']);
+$router->post('/create-post', [PostController::class, 'form']);
+
 return $router;

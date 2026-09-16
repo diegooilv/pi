@@ -15,6 +15,7 @@
 @import url("./modules/contact.css");
 @import url("./modules/profile.css");
 @import url("./modules/dashboard.css");
+@import url("./modules/createPost.css");
 
 @font-face {
     font-family: "Cinzel";

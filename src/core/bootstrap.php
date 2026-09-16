@@ -39,10 +39,10 @@ require_once __DIR__ . '/../controller/ChatBotController.php';
 require_once __DIR__ . '/../controller/UserPageController.php';
 require_once __DIR__ . '/../controller/Philosophers.php';
 require_once __DIR__ . '/../controller/ContactController.php';
-require_once __DIR__ . '/../controller/PostController.php';
 require_once __DIR__ . '/../controller/ProfileController.php';
 require_once __DIR__ . '/../controller/LogoutController.php';
 require_once __DIR__ . '/../controller/DashboardController.php';
+require_once __DIR__ . '/../controller/CreatePostController.php';
 
 // Services
 require_once __DIR__ . '/../service/ErrorService.php';
@@ -61,6 +61,7 @@ require_once __DIR__ . '/../service/NavigationService.php';
 require_once __DIR__ . '/../service/RateLimitService.php';
 require_once __DIR__ . '/../service/UserService.php';
 require_once __DIR__ . '/../service/PhilosophersService.php';
+require_once __DIR__ . '/../service/PostService.php';
 
 
 // Layouts
