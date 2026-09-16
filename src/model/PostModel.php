@@ -1,52 +1,180 @@
 <?php
-// title, body, author_id, category_id
-// image, reading_time, status
 
 class PostModel
 {
-    public function __construct(
-        private $id,
-        private $userId,
-        private $categoryId,
-        private $title,
-        private $description,
-        private $banner,
-        private $links
-    ) {
+    private $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = Database::connect();
     }
 
-    public function getId()
+    public function create($authorId, $categoryId, $title, $body, $image, $readingTime, $status = 'published')
     {
-        return $this->id;
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO posts (author_id, category_id, title, body, image, reading_time, status)
+             VALUES (?,?,?,?,?,?,?)'
+        );
+
+        $stmt->execute([
+            $authorId,
+            $categoryId,
+            $title,
+            $body,
+            $image,
+            $readingTime,
+            $status
+        ]);
+
+        return $this->pdo->lastInsertId();
     }
 
-    public function getUserId()
+    public function findById($id)
     {
-        return $this->userId;
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE id = ? AND deleted_at IS NULL'
+        );
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getCategoryId()
+    public function findByAuthor($authorId)
     {
-        return $this->categoryId;
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE author_id = ? AND deleted_at IS NULL'
+        );
+
+        $stmt->execute([$authorId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getTitle()
+    public function findByCategory($categoryId)
     {
-        return $this->title;
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE category_id = ? AND deleted_at IS NULL'
+        );
+
+        $stmt->execute([$categoryId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getDescription()
+    public function findAll($status = null)
     {
-        return $this->description;
+        if ($status) {
+            $stmt = $this->pdo->prepare(
+                'SELECT * FROM posts WHERE status = ? AND deleted_at IS NULL ORDER BY created_at DESC'
+            );
+
+            $stmt->execute([$status]);
+        } else {
+            $stmt = $this->pdo->prepare(
+                'SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC'
+            );
+
+            $stmt->execute();
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getBanner()
+    public function findPosts($numberOfPosts = 10, $offset = 0)
     {
-        return $this->banner;
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?'
+        );
+
+        $stmt->bindValue(1, (int)$numberOfPosts, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getLinks()
+    public function findLatestPosts($numberOfPosts = 10)
     {
-        return $this->links;
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ?'
+        );
+
+        $stmt->bindValue(1, (int)$numberOfPosts, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function update($id, $data)
+    {
+        $fields = [];
+        $values = [];
+
+        foreach ($data as $column => $value) {
+            $fields[] = "{$column} = ?";
+            $values[] = $value;
+        }
+
+        $values[] = $id;
+
+        $sql = "UPDATE posts SET " . implode(', ', $fields) . " WHERE id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute($values);
+    }
+
+    public function delete($id)
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM posts WHERE id = ?');
+        $stmt->execute([$id]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function toggleStatus($id, $published)
+    {
+        if ($published) {
+            $stmt = $this->pdo->prepare(
+                'UPDATE posts
+                 SET status = ?, deleted_at = NULL
+                 WHERE id = ?'
+            );
+
+            $stmt->execute(['published', $id]);
+        } else {
+            $stmt = $this->pdo->prepare(
+                'UPDATE posts
+                 SET status = ?
+                 WHERE id = ?'
+            );
+
+            $stmt->execute(['archived', $id]);
+        }
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function softDelete($id)
+    {
+        $stmt = $this->pdo->prepare(
+            'UPDATE posts SET deleted_at = NOW() WHERE id = ?'
+        );
+
+        $stmt->execute([$id]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function restore($id)
+    {
+        $stmt = $this->pdo->prepare(
+            'UPDATE posts SET deleted_at = NULL WHERE id = ?'
+        );
+
+        $stmt->execute([$id]);
+
+        return $stmt->rowCount() > 0;
     }
 }
