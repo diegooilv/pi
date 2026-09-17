@@ -7,16 +7,29 @@
 
 <?php
 
-function renderReportForm()
+function renderReportForm($type, $contentId)
 {
     return "
-        <form class='report-form'>
+        <form class='report-form' action='/report' method='POST'>
+
+            <input
+                type='hidden'
+                name='type'
+                value='{$type}'
+            >
+
+            <input
+                type='hidden'
+                name='content_id'
+                value='{$contentId}'
+            >
 
             <input
                 class='report-input'
                 type='text'
                 name='reason'
                 placeholder='Descreva o motivo da denúncia'
+                required
             >
 
             <label
@@ -30,6 +43,7 @@ function renderReportForm()
                 class='report-select'
                 id='report-category'
                 name='category'
+                required
             >
                 <option value='adult-content'>
                     Conteúdo Adulto (+18)
@@ -126,7 +140,7 @@ function reportMaterial($material, $author)
 
             </div>
 
-            " . renderReportForm() . "
+            " . renderReportForm('material', $material->getId()) . "
 
         </article>
     ";
@@ -134,24 +148,10 @@ function reportMaterial($material, $author)
 
 function reportPost($post, $author)
 {
-    $linksHtml = '';
-
-    foreach ($post->getLinks() as $link) {
-        $linksHtml .= "
-            <a
-                class='report-link'
-                href='{$link}'
-                target='_blank'
-            >
-                {$link}
-            </a>
-        ";
-    }
-
     return "
         <article
             class='report-content'
-            id='post-{$post->getId()}'
+            id='post-{$post['id']}'
         >
 
             <h2 class='report-heading'>
@@ -160,23 +160,23 @@ function reportPost($post, $author)
 
             <a
                 class='report-card'
-                href='/post/{$post->getId()}'
+                href='/post/{$post['id']}'
             >
 
                 <div class='report-body'>
 
                     <h3 class='report-title'>
-                        {$post->getTitle()}
+                        {$post['title']}
                     </h3>
 
                     <img
                         class='report-image'
-                        src='{$post->getBanner()}'
-                        alt='{$post->getTitle()}'
+                        src='{$post['image']}'
+                        alt='{$post['title']}'
                     >
 
                     <p class='report-description'>
-                        {$post->getDescription()}
+                        {$post['body']}
                     </p>
 
                 </div>
@@ -185,30 +185,26 @@ function reportPost($post, $author)
 
             <div class='report-footer'>
 
-                <div class='report-links'>
-                    {$linksHtml}
-                </div>
-
                 <div class='report-author'>
 
                     <img
                         class='report-author-image'
-                        src='{$author->getImageUrl()}'
-                        alt='{$author->getUsername()}'
+                        src='{$author['image_url']}'
+                        alt='{$author['username']}'
                     >
 
                     <a
-                        href='/user/{$author->getId()}'
+                        href='/user/{$author['id']}'
                         class='report-author-name'
                     >
-                        {$author->getUsername()}
+                        {$author['username']}
                     </a>
 
                 </div>
 
             </div>
 
-            " . renderReportForm() . "
+            " . renderReportForm('post', $post['id']) . "
 
         </article>
     ";
