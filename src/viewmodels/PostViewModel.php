@@ -3,8 +3,8 @@
 class PostViewModel
 {
     public function __construct(
-        private PostModel $post,
-        private UserModel $author
+        private array $post,
+        private array $author
     ) {
     }
 

@@ -12,8 +12,12 @@
     <?= renderHeader($navItems) ?>
 
     <main>
+        <main class="feed">
+        <?php foreach ($posts as $postView): ?>
+            <?= renderPost($postView) ?>
+        <?php endforeach; ?>
     </main>
-
+    </main>
     <?= renderFooter() ?>
     <?= renderVLibras() ?>
 </body>

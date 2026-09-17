@@ -5,29 +5,23 @@ function renderPost($postView)
     $post = $postView->getPost();
     $author = $postView->getAuthor();
 
-    $linksHtml = "";
-
-    foreach ($post->getLinks() as $link) {
-        $linksHtml .= "<a class='post-link' href='{$link}' target='_blank'>{$link}</a>";
-    }
-
     return "
-    <article class='post' id='post-{$post->getId()}'>
+    <article class='post' id='post-{$post['id']}'>
 
-        <a class='post-wrapper' href='/post/{$post->getId()}'>
+        <a class='post-wrapper' href='/post/{$post['id']}'>
 
             <div class='post-content'>
 
-                <h2 class='post-title'>{$post->getTitle()}</h2>
+                <h2 class='post-title'>{$post['title']}</h2>
 
                 <img
                     class='post-banner'
-                    src='{$post->getBanner()}'
-                    alt='{$post->getTitle()}'
+                    src='{$post['image']}'
+                    alt='{$post['title']}'
                 >
 
                 <p class='post-description'>
-                    {$post->getDescription()}
+                    {$post['body']}
                 </p>
 
             </div>
@@ -36,30 +30,26 @@ function renderPost($postView)
 
         <div class='post-content'>
 
-            <div class='post-links'>
-                {$linksHtml}
-            </div>
-
             <div class='post-author'>
 
                 <img
                     class='post-author-img'
-                    src='{$author->getImageUrl()}'
-                    alt='{$author->getUsername()}'
+                    src='{$author['image_url']}'
+                    alt='{$author['username']}'
                 >
 
                 <a
-                    href='/user/{$author->getId()}'
+                    href='/user/{$author['id']}'
                     class='post-author-name'
                 >
-                    {$author->getUsername()}
+                    {$author['username']}
                 </a>
 
             </div>
 
             <a
                 class='post-btn-report'
-                href='/report/post/{$post->getId()}'
+                href='/report/post/{$post['id']}'
             >
                 Report
             </a>
