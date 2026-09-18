@@ -31,7 +31,7 @@
                     <span class="post-author">
                         <span class="post-meta__label">por</span>
                         <?php if (!empty($post['author_id'])): ?>
-                            <a href="/user/<?= (int) $post['author_id'] ?>" class="post-author__link">
+                            <a href="/user/<?= $post['author_username']; ?>" class="post-author__link">
                                 <strong><?= htmlspecialchars($post['author_name'] ?? 'Autor desconhecido') ?></strong>
                             </a>
                         <?php else: ?>

@@ -32,17 +32,18 @@ class PostModel
     public function findById(int $id)
     {
         $sql = "
-        SELECT 
-            posts.*,
-            categories.name AS category_name,
-            users.name AS author_name
-        FROM posts
-        INNER JOIN categories ON categories.id = posts.category_id
-        INNER JOIN users ON users.id = posts.author_id
-        WHERE posts.id = :id
-          AND posts.deleted_at IS NULL
-        LIMIT 1
-    ";
+    SELECT 
+        posts.*,
+        categories.name AS category_name,
+        users.name AS author_name,
+        users.username AS author_username
+    FROM posts
+    INNER JOIN categories ON categories.id = posts.category_id
+    INNER JOIN users ON users.id = posts.author_id
+    WHERE posts.id = :id
+      AND posts.deleted_at IS NULL
+    LIMIT 1
+";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
