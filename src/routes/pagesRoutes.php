@@ -24,15 +24,14 @@ $router->get('/philosophers/{name}', [Philosophers::class, 'philosophersProfile'
 $router->get('/contact', [ContactController::class, 'index']);
 $router->post('/contact', [ContactController::class, 'form']);
 
-$router->get('/posts/create', [PostController::class, 'index']);
+$router->get('/post/create', [PostController::class, 'create']);
+$router->post('/post/create', [PostController::class, 'createForm']);
+$router->get('/post/{id}', [PostController::class, 'post']);
 
 $router->get('/profile', [ProfileController::class, 'index']);
 
 $router->get('/logout', [LogoutController::class, 'index']);
 
 $router->get('/dashboard', [DashboardController::class, 'index']);
-
-$router->get('/create-post', [PostController::class, 'index']);
-$router->post('/create-post', [PostController::class, 'form']);
 
 return $router;

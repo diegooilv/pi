@@ -15,7 +15,7 @@ class PostController extends Controller
         $this->postService = new PostService();
     }
 
-    public function index()
+    public function create()
     {
         $this->authService->requireLogin();
         $categories = [
@@ -41,7 +41,7 @@ class PostController extends Controller
         $this->view('createPost', compact('navItems', 'categories', 'errors', 'old'));
     }
 
-    public function form()
+    public function createForm()
     {
         CsrfService::check();
 
@@ -62,7 +62,7 @@ class PostController extends Controller
         if (!empty($errors)) {
             $_SESSION['errors'] = $errors;
             $_SESSION['old'] = $_POST;
-            header('Location: /posts/create');
+            header('Location: /post/create');
             exit;
         }
 
@@ -76,8 +76,18 @@ class PostController extends Controller
             'status' => $_POST['status'] ?? 'published',
         ], $_FILES['image'] ?? null);
 
-        header('Location: /posts/' . $postId);
+        header('Location: /post/' . $postId);
         exit;
+    }
+
+    public function post($id){
+        $post = $this->postService->getPostById($id);
+        if (!$post) {
+            $this->view('404');
+            return;
+        }
+        $navItems = $this->navigationService->getHeaderItems('home');
+        $this->view('showPost', compact('navItems', 'post'));
 
     }
 

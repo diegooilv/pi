@@ -29,15 +29,27 @@ class PostModel
         return $this->pdo->lastInsertId();
     }
 
-    public function findById($id)
+    public function findById(int $id)
     {
-        $stmt = $this->pdo->prepare(
-            'SELECT * FROM posts WHERE id = ? AND deleted_at IS NULL'
-        );
+        $sql = "
+        SELECT 
+            posts.*,
+            categories.name AS category_name,
+            users.name AS author_name
+        FROM posts
+        INNER JOIN categories ON categories.id = posts.category_id
+        INNER JOIN users ON users.id = posts.author_id
+        WHERE posts.id = :id
+          AND posts.deleted_at IS NULL
+        LIMIT 1
+    ";
 
-        $stmt->execute([$id]);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $post ?: null;
     }
 
     public function findByAuthor($authorId)
@@ -87,8 +99,8 @@ class PostModel
             'SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?'
         );
 
-        $stmt->bindValue(1, (int)$numberOfPosts, PDO::PARAM_INT);
-        $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+        $stmt->bindValue(1, (int) $numberOfPosts, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int) $offset, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -100,7 +112,7 @@ class PostModel
             'SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ?'
         );
 
-        $stmt->bindValue(1, (int)$numberOfPosts, PDO::PARAM_INT);
+        $stmt->bindValue(1, (int) $numberOfPosts, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
