@@ -39,7 +39,7 @@ function renderPost($postView)
                 >
 
                 <a
-                    href='/user/{$author['id']}'
+                    href='/user/{$author['username']}'
                     class='post-author-name'
                 >
                     {$author['username']}
