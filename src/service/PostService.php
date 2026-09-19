@@ -75,4 +75,33 @@ class PostService
         $post = $this->getPostById($postId);
         return new PostViewModel($post, $this->userModel->findById($post['author_id']));
     }
+
+    public function updatePost($postId, array $data, $imageFile = null)
+    {
+        $post = $this->getPostById($postId);
+        if (!$post) {
+            throw new Exception("Post not found");
+        }
+
+        $imageUrl = $post['image'];
+
+        if ($imageFile && $imageFile['error'] === UPLOAD_ERR_OK) {
+            $imageUrl = $this->cloudinaryService->upload($imageFile['tmp_name']);
+        }
+
+        $body = trim($data['body']);
+        $readingTime = $this->calculateReadingTime($body);
+
+        $data = [
+            'title' => trim($data['title']),
+            'body' => $body,
+            'image' => $imageUrl,
+            'reading_time' => $readingTime,
+            'status' => $data['status'] ?? 'published',
+        ];
+        return $this->postModel->update(
+            $postId,
+            $data
+        );
+    }
 }

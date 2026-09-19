@@ -7,7 +7,7 @@ class AuthService
     {
         $this->userModel = new UserModel();
     }
-    public function isLogged(): bool
+    public function isLogged()
     {
         return isset($_SESSION['auth']);
     }
@@ -76,5 +76,9 @@ class AuthService
         $_SESSION = [];
         session_destroy();
         header('Location: /login');
+    }
+     public function isAdmin()
+    {
+        return $this->isLogged() && $_SESSION['auth']['role'] === 'admin';
     }
 }

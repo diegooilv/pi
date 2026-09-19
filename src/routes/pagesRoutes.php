@@ -27,7 +27,8 @@ $router->post('/contact', [ContactController::class, 'form']);
 $router->get('/post/create', [PostController::class, 'create']);
 $router->post('/post/create', [PostController::class, 'createForm']);
 $router->get('/post/{id}', [PostController::class, 'post']);
-
+$router->get('/post/{id}/edit', [PostController::class, 'editPost']);
+$router->post('/post/{id}/edit', [PostController::class, 'editPostForm']);
 $router->get('/profile', [ProfileController::class, 'index']);
 
 $router->get('/logout', [LogoutController::class, 'index']);

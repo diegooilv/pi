@@ -462,3 +462,25 @@
     color: var(--accent);
     border-color: var(--accent);
 }
+
+.post-edit-btn {
+    display: inline-flex;
+    margin-left: 0.5rem;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-alt);
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.6;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(244, 233, 216, 0.2);
+    border-radius: 6px;
+    transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.post-edit-btn:hover {
+    opacity: 1;
+    color: var(--accent);
+    border-color: var(--accent);
+}

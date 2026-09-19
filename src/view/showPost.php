@@ -49,9 +49,20 @@
                 </div>
 
                 <div class="post-actions">
+
                     <a href="/report/post/<?= (int) $post['id'] ?>" class="post-report-btn">
                         Denunciar post
                     </a>
+
+                    <?php if (
+                        (int) $post['author_id'] === (int) $_SESSION['auth']['id'] ||
+                        $_SESSION['auth']['role'] === 'admin'
+                    ): ?>
+                        <a href="/post/<?= (int) $post['id'] ?>/edit" class="post-edit-btn">
+                            Editar post
+                        </a>
+
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

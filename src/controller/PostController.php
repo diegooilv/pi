@@ -80,7 +80,8 @@ class PostController extends Controller
         exit;
     }
 
-    public function post($id){
+    public function post($id)
+    {
         $this->authService->requireLogin();
         $post = $this->postService->getPostById($id);
         if (!$post) {
@@ -89,5 +90,63 @@ class PostController extends Controller
         }
         $navItems = $this->navigationService->getHeaderItems('home');
         $this->view('showPost', compact('navItems', 'post'));
+    }
+
+    public function editPost($id)
+    {
+        $this->authService->requireLogin();
+        $post = $this->postService->getPostById($id);
+        if (!$post) {
+            $this->view('404');
+            return;
+        }
+        if ($post['author_id'] !== $_SESSION['auth']['id'] && !$this->authService->isAdmin()) {
+            $this->view('403');
+            return;
+        }
+        $navItems = $this->navigationService->getHeaderItems('home');
+        $errors = $_SESSION['errors'] ?? [];
+        unset($_SESSION['errors']);
+        $this->view('editPost', compact('navItems', 'post', 'errors'));
+    }
+
+    public function editPostForm($id)
+    {
+        CsrfService::check();
+        $this->authService->requireLogin();
+        $post = $this->postService->getPostById($id);
+        if (!$post) {
+            $this->view('404');
+            return;
+        }
+        if ($post['author_id'] !== $_SESSION['auth']['id'] && !$this->authService->isAdmin()) {
+            $this->view('403');
+            return;
+        }
+
+        $errors = [];
+
+        if (empty($_POST['title'])) {
+            $errors[] = 'O título é obrigatório.';
+        }
+
+        if (empty($_POST['body'])) {
+            $errors[] = 'O conteúdo é obrigatório.';
+        }
+
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            header('Location: /post/' . $id . '/edit');
+            exit;
+        }
+
+        $this->postService->updatePost($id, [
+            'title' => $_POST['title'],
+            'body' => $_POST['body'],
+            'image' => $_FILES['image'] ?? null,
+        ]);
+
+        header('Location: /post/' . $id);
+        exit;
     }
 }

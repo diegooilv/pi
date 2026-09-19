@@ -201,4 +201,23 @@ class PostModel
 
         return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
+
+    public function editPost($id, $data)
+    {
+        $fields = [];
+        $values = [];
+
+        foreach ($data as $column => $value) {
+            $fields[] = "{$column} = ?";
+            $values[] = $value;
+        }
+
+        $values[] = $id;
+
+        $sql = "UPDATE posts SET " . implode(', ', $fields) . " WHERE id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        return $stmt->execute($values);
+    }
 }
