@@ -190,4 +190,15 @@ class PostModel
 
         return $stmt->rowCount() > 0;
     }
+
+    public function getNumberPosts()
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT COUNT(*) as total FROM posts WHERE deleted_at IS NULL'
+        );
+
+        $stmt->execute();
+
+        return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
 }

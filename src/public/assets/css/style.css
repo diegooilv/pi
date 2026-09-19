@@ -16,6 +16,7 @@
 @import url("./modules/profile.css");
 @import url("./modules/dashboard.css");
 @import url("./modules/createPost.css");
+@import url("./modules/navigation.css");
 
 @font-face {
     font-family: "Cinzel";

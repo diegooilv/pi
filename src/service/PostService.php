@@ -66,6 +66,10 @@ class PostService
         return $postViews;
     }
 
+    public function getNumberOfPosts()
+    {
+        return $this->postModel->getNumberPosts();
+    }
     public function renderPostView($postId)
     {
         $post = $this->getPostById($postId);
