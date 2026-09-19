@@ -81,6 +81,7 @@ class PostController extends Controller
     }
 
     public function post($id){
+        $this->authService->requireLogin();
         $post = $this->postService->getPostById($id);
         if (!$post) {
             $this->view('404');
@@ -88,7 +89,5 @@ class PostController extends Controller
         }
         $navItems = $this->navigationService->getHeaderItems('home');
         $this->view('showPost', compact('navItems', 'post'));
-
     }
-
 }
