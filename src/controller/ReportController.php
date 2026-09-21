@@ -5,12 +5,14 @@ class ReportController extends Controller
     private ReportService $reportService;
     private NavigationService $navigationService;
     private AuthService $authService;
+    private UserService $userService;
 
     public function __construct()
     {
         $this->reportService = new ReportService();
         $this->navigationService = new NavigationService();
         $this->authService = new AuthService();
+        $this->userService = new UserService();
     }
 
     // $material, $author
@@ -23,7 +25,7 @@ class ReportController extends Controller
     public function post($id)
     {
         $this->authService->requireLogin();
-        $navItems = $this->navigationService->getHeaderItems('report');
+        $navItems = $this->navigationService->getHeaderItems('home');
 
         $type = 'post';
 
@@ -38,6 +40,19 @@ class ReportController extends Controller
         );
     }
 
+    public function user($username)
+    {
+        $this->authService->requireLogin();
+        $navItems = $this->navigationService->getHeaderItems('home');
+
+        $type = 'user';
+        $user = $this->userService->getUserByUsername($username);
+
+        $this->view(
+            'report',
+            compact('type', 'user', 'navItems')
+        );
+    }
     public function form(){
         // fazer o form funcionar
     }
