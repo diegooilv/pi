@@ -1,9 +1,11 @@
 <?php
-function e($value) {
+function e($value)
+{
     return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-function has($arr, $key) {
+function has($arr, $key)
+{
     return !empty($arr[$key]);
 }
 
@@ -39,8 +41,8 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                     Ver todos
                     <svg class="dashboard-section__arrow" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </a>
             </div>
@@ -50,20 +52,23 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                     <?php foreach ($postsLimit as $post): ?>
                         <li class="dashboard-list__item">
                             <a class="dashboard-list__link" href="/posts/<?= e($post['id']) ?>">
-                                <?php if (has($post, 'image')): ?>
+                                <?php if (!empty($post['image'])): ?>
                                     <img class="dashboard-list__image" src="<?= e($post['image']) ?>"
                                         alt="<?= e($post['title'] ?? '') ?>">
                                 <?php endif; ?>
-
                                 <div class="dashboard-list__content">
-                                    <h3 class="dashboard-list__title"><?= e($post['title'] ?? 'Sem título') ?></h3>
-
-                                    <?php if (has($post, 'excerpt')): ?>
-                                        <p class="dashboard-list__excerpt"><?= e($post['excerpt']) ?></p>
+                                    <h3 class="dashboard-list__title">
+                                        <?= e($post['title'] ?? 'Sem título') ?>
+                                    </h3>
+                                    <?php if (!empty($post['body'])): ?>
+                                        <p class="dashboard-list__excerpt">
+                                            <?= e(mb_strimwidth(strip_tags($post['body']), 0, 150, '...')) ?>
+                                        </p>
                                     <?php endif; ?>
-
-                                    <?php if (has($post, 'date')): ?>
-                                        <span class="dashboard-list__date"><?= e($post['date']) ?></span>
+                                    <?php if (!empty($post['created_at'])): ?>
+                                        <span class="dashboard-list__date">
+                                            <?= e($post['created_at']) ?>
+                                        </span>
                                     <?php endif; ?>
                                 </div>
                             </a>
@@ -71,7 +76,9 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
-                <p class="dashboard-section__empty">Você ainda não publicou nenhum post.</p>
+                <p class="dashboard-section__empty">
+                    Você ainda não publicou nenhum post.
+                </p>
             <?php endif; ?>
         </section>
 
@@ -82,8 +89,8 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                     Ver todos
                     <svg class="dashboard-section__arrow" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </a>
             </div>
