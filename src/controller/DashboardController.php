@@ -3,11 +3,13 @@ class DashboardController extends Controller
 {
     private AuthService $authService;
     private NavigationService $navService;
+    private PostService $postService;
 
     public function __construct()
     {
         $this->authService = new AuthService();
         $this->navService = new NavigationService();
+        $this->postService = new PostService();
     }
     public function index()
     {
@@ -18,50 +20,7 @@ class DashboardController extends Controller
             'username' => 'tommy',
         ];
 
-        $posts = [
-            [
-                'id' => 1,
-                'title' => 'Friedrich Nietzsche: vida, obras e pensamento',
-                'excerpt' => 'Conheça a trajetória de Nietzsche, suas principais obras e as ideias que transformaram a filosofia ocidental.',
-                'date' => '10 de agosto de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Deus está morto: o que Nietzsche realmente quis dizer?',
-                'excerpt' => 'Entenda o significado filosófico da famosa declaração de Nietzsche e sua relação com a crise dos valores tradicionais.',
-                'date' => '3 de agosto de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-            [
-                'id' => 3,
-                'title' => 'O Übermensch: o conceito de além-do-homem',
-                'excerpt' => 'Explore a ideia do Übermensch em Nietzsche e sua relação com a superação de si mesmo e a criação de novos valores.',
-                'date' => '28 de julho de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-            [
-                'id' => 4,
-                'title' => 'Vontade de potência: a força por trás da vida',
-                'excerpt' => 'Entenda um dos conceitos centrais do pensamento nietzschiano e suas diferentes interpretações.',
-                'date' => '20 de julho de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-            [
-                'id' => 5,
-                'title' => 'Eterno retorno: você viveria sua vida novamente?',
-                'excerpt' => 'Uma análise do conceito de eterno retorno e do desafio de afirmar a própria existência.',
-                'date' => '15 de julho de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-            [
-                'id' => 6,
-                'title' => 'Nietzsche contra a moral tradicional',
-                'excerpt' => 'Como Nietzsche questionou a origem dos valores morais e criticou a moralidade herdada do Ocidente.',
-                'date' => '8 de julho de 2026',
-                'image' => '/assets/images/post.png',
-            ],
-        ];
+        $posts = $this->postService->getPostByAuthorId($_SESSION['auth']['id'], $limit = 100);
 
         $materials = [
             [

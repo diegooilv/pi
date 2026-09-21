@@ -104,4 +104,8 @@ class PostService
             $data
         );
     }
+
+    public function getPostByAuthorId($authorId, $limit = 5, $offset = 0){
+        return $this->postModel->findByAuthor($authorId, $limit, $offset);
+    }
 }

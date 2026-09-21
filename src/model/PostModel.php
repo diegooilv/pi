@@ -53,13 +53,16 @@ class PostModel
         return $post ?: null;
     }
 
-    public function findByAuthor($authorId)
+    public function findByAuthor($authorId, $limit = 10, $offset = 0)
     {
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM posts WHERE author_id = ? AND deleted_at IS NULL'
+            'SELECT * FROM posts WHERE author_id = ? AND deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?'
         );
 
-        $stmt->execute([$authorId]);
+        $stmt->bindValue(1, (int) $authorId, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(3, (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -200,6 +203,17 @@ class PostModel
         $stmt->execute();
 
         return (int) $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getPostsByAuthor($authorId)
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM posts WHERE author_id = ? AND deleted_at IS NULL ORDER BY created_at DESC'
+        );
+
+        $stmt->execute([$authorId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function editPost($id, $data)
