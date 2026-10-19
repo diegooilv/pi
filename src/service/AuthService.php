@@ -36,17 +36,18 @@ class AuthService
         $user = $this->userModel->findByEmail($email);
 
         if (!$user) {
-            die("USER NOT FOUND");
+            return false;
         }
 
         if (!password_verify($password, $user['password_hash'])) {
-            die("PASSWORD WRONG");
+            return false;
         }
 
         if (!$user['active']) {
-            die("USER INACTIVE");
+            return false;
         }
 
+        session_regenerate_id(true);
         $_SESSION['auth'] = [
             'id' => $user['id'],
             'role' => $user['role']
@@ -60,6 +61,7 @@ class AuthService
         try {
 
             $id = $this->userModel->create($name, $username, $email, $password_hash, $bio, $image_url);
+            session_regenerate_id(true);
             $_SESSION['auth'] = [
                 'id' => $id,
                 'role' => 'user'
