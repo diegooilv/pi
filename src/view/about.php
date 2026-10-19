@@ -8,6 +8,7 @@
     <title>Noesis - Sobre</title>
 </head>
 
+<body>
 <?= renderHeader($navItems) ?>
 <main class="about">
 
@@ -128,3 +129,5 @@
 <?= renderFooter() ?>
 
 <?= renderVLibras() ?>
+</body>
+</html>
