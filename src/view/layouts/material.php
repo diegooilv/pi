@@ -71,6 +71,14 @@ function renderMaterial($materialView)
     $author = $materialView->getAuthor();
 
     $url = $material->getUrl();
+    $materialId = (int) $material->getId();
+    $title = htmlspecialchars($material->getTitle(), ENT_QUOTES, 'UTF-8');
+    $imageUrl = htmlspecialchars($material->getImageUrl(), ENT_QUOTES, 'UTF-8');
+    $description = nl2br(htmlspecialchars($material->getDescription(), ENT_QUOTES, 'UTF-8'));
+    $safeUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+    $authorId = (int) $author->getId();
+    $authorImage = htmlspecialchars($author->getImageUrl(), ENT_QUOTES, 'UTF-8');
+    $authorUsername = htmlspecialchars($author->getUsername(), ENT_QUOTES, 'UTF-8');
 
     $extension = strtolower(
         pathinfo(
@@ -82,25 +90,25 @@ function renderMaterial($materialView)
     $icon = getMaterialIcon($extension);
 
     return "
-    <article class='material' id='material-{$material->getId()}'>
+    <article class='material' id='material-{$materialId}'>
 
         <a
             class='material-wrapper'
-            href='/material/{$material->getId()}'
+            href='/material/{$materialId}'
         >
 
             <div class='material-content'>
 
-                <h2 class='material-title'>{$material->getTitle()}</h2>
+                <h2 class='material-title'>{$title}</h2>
 
                 <img
                     class='material-banner'
-                    src='{$material->getImageUrl()}'
-                    alt='{$material->getTitle()}'
+                    src='{$imageUrl}'
+                    alt='{$title}'
                 >
 
                 <p class='material-description'>
-                    {$material->getDescription()}
+                    {$description}
                 </p>
 
             </div>
@@ -113,7 +121,7 @@ function renderMaterial($materialView)
 
                 <a
                     class='material-link'
-                    href='{$url}'
+                    href='{$safeUrl}'
                     target='_blank'
                     rel='noopener noreferrer'
                     title='Abrir material'
@@ -127,22 +135,22 @@ function renderMaterial($materialView)
 
                 <img
                     class='material-author-img'
-                    src='{$author->getImageUrl()}'
-                    alt='{$author->getUsername()}'
+                    src='{$authorImage}'
+                    alt='{$authorUsername}'
                 >
 
                 <a
-                    href='/user/{$author->getId()}'
+                    href='/user/{$authorId}'
                     class='material-author-name'
                 >
-                    {$author->getUsername()}
+                    {$authorUsername}
                 </a>
 
             </div>
 
             <a
                 class='material-btn-report'
-                href='/report/material/{$material->getId()}'
+                href='/report/material/{$materialId}'
             >
                 Report
             </a>

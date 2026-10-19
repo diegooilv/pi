@@ -14,8 +14,8 @@
         <h1>Fale conosco</h1>
         <p>Tem alguma dúvida, sugestão ou reclamação? Escolha o canal mais fácil pra você:</p>
         <?php if (isset($response)): ?>
-            <div class="contact-alert contact-alert--<?= $response['type'] ?>">
-                <?= htmlspecialchars($response['message']) ?>
+            <div class="contact-alert contact-alert--<?= htmlspecialchars($response['type'] ?? '', ENT_QUOTES, 'UTF-8') ?>" role="status">
+                <?= htmlspecialchars($response['message'] ?? '', ENT_QUOTES, 'UTF-8') ?>
             </div>
         <?php endif; ?>
         <?php if (!isset($response)): ?>
@@ -57,7 +57,7 @@
                     </svg>
 
                     <span>Email:</span>
-                    <a href="mailto:<?= $email ?>"><?= $email ?></a>
+                    <a href="mailto:<?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($email, ENT_QUOTES, 'UTF-8') ?></a>
                 </div>
 
                 <div class="contact-item">
@@ -67,7 +67,7 @@
                     </svg>
 
                     <span>Telefone:</span>
-                    <a href="tel:<?= $number ?>"><?= $number ?></a>
+                    <a href="tel:<?= htmlspecialchars($number, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($number, ENT_QUOTES, 'UTF-8') ?></a>
                 </div>
             </div>
         <?php endif; ?>

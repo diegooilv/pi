@@ -8,6 +8,7 @@
     <title>Noesis - IA</title>
 </head>
 
+<body>
 <?= renderHeader($navItems) ?>
 <main>
     <section class="noesis-ia">
@@ -34,7 +35,7 @@
                             alt='Logo do Site'>
                     </div>
                     <div class="noesis-ia__response">
-                        <?= $resposta ?>
+                        <?= nl2br(htmlspecialchars($resposta, ENT_QUOTES, 'UTF-8')) ?>
                     </div>
                 </div>
             <?php endif ?>
@@ -61,7 +62,7 @@
                 placeholder="<?= !empty($resposta) ? 'Continue a conversa...' : 'Digite sua pergunta filosófica...' ?>"
                 autocomplete="off" required>
 
-            <button class="noesis-ia__button" type="submit">
+            <button class="noesis-ia__button" type="submit" aria-label="Enviar pergunta">
                 <svg viewBox="0 0 24 24" fill="none" class="noesis-ia__button-icon">
                     <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
                         stroke-linejoin="round" />
@@ -74,3 +75,5 @@
 
 <?= renderFooter() ?>
 <?= renderVLibras() ?>
+</body>
+</html>

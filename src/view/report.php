@@ -9,6 +9,8 @@
 
 function renderReportForm($type, $contentId, $extraCategories = [])
 {
+    $type = htmlspecialchars((string) $type, ENT_QUOTES, 'UTF-8');
+    $contentId = htmlspecialchars((string) $contentId, ENT_QUOTES, 'UTF-8');
     $categoryOptions = "
                 <option value='adult-content'>
                     Conteúdo Adulto (+18)
@@ -23,6 +25,8 @@ function renderReportForm($type, $contentId, $extraCategories = [])
     ";
 
     foreach ($extraCategories as $value => $label) {
+        $value = htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+        $label = htmlspecialchars((string) $label, ENT_QUOTES, 'UTF-8');
         $categoryOptions .= "
                 <option value='{$value}'>
                     {$label}
@@ -74,28 +78,37 @@ function renderReportForm($type, $contentId, $extraCategories = [])
 
 function reportMaterial($material, $author)
 {
+    $materialId = (int) $material->getId();
+    $title = htmlspecialchars($material->getTitle(), ENT_QUOTES, 'UTF-8');
+    $imageUrl = htmlspecialchars($material->getImageUrl(), ENT_QUOTES, 'UTF-8');
+    $description = nl2br(htmlspecialchars($material->getDescription(), ENT_QUOTES, 'UTF-8'));
+    $materialUrl = htmlspecialchars($material->getUrl(), ENT_QUOTES, 'UTF-8');
+    $authorId = (int) $author->getId();
+    $authorImage = htmlspecialchars($author->getImageUrl(), ENT_QUOTES, 'UTF-8');
+    $authorName = htmlspecialchars($author->getUsername(), ENT_QUOTES, 'UTF-8');
+
     return "
         <article
             class='report-content'
-            id='material-{$material->getId()}'
+            id='material-{$materialId}'
         >
             <h2 class='report-heading'>
                 Denúncia de Material
             </h2>
-                class='report-card'
-                href='/material/{$material->getId()}'
+            <a class='report-card'
+                href='/material/{$materialId}'
             >
                 <div class='report-body'>
                     <h3 class='report-title'>
-                        {$material->getTitle()}
+                        {$title}
                     </h3>
                     <img
                         class='report-image'
-                        src='{$material->getImageUrl()}'
-                        alt='{$material->getTitle()}'
+                        src='{$imageUrl}'
+                        alt='{$title}'
                     >
                     <p class='report-description'>
-                        {$material->getDescription()}
+                        {$description}
                     </p>
                 </div>
 
@@ -103,8 +116,8 @@ function reportMaterial($material, $author)
 
             <div class='report-footer'>
                 <div class='report-actions'>
-                        class='report-action'
-                        href='{$material->getUrl()}'
+                    <a class='report-action'
+                        href='{$materialUrl}'
                         target='_blank'
                         rel='noopener noreferrer'
                         title='Abrir material'
@@ -115,46 +128,54 @@ function reportMaterial($material, $author)
                 <div class='report-author'>
                     <img
                         class='report-author-image'
-                        src='{$author->getImageUrl()}'
-                        alt='{$author->getUsername()}'
+                        src='{$authorImage}'
+                        alt='{$authorName}'
                     >
-                        href='/user/{$author->getId()}'
+                    <a href='/user/{$authorId}'
                         class='report-author-name'
                     >
-                        {$author->getUsername()}
+                        {$authorName}
                     </a>
                 </div>
             </div>
-            " . renderReportForm('material', $material->getId()) . "
+            " . renderReportForm('material', $materialId) . "
         </article>
     ";
 }
 
 function reportPost($post, $author)
 {
+    $postId = (int) ($post['id'] ?? 0);
+    $title = htmlspecialchars($post['title'] ?? '', ENT_QUOTES, 'UTF-8');
+    $image = htmlspecialchars($post['image'] ?? '', ENT_QUOTES, 'UTF-8');
+    $body = nl2br(htmlspecialchars($post['body'] ?? '', ENT_QUOTES, 'UTF-8'));
+    $authorImage = htmlspecialchars($author['image_url'] ?? '', ENT_QUOTES, 'UTF-8');
+    $authorName = htmlspecialchars($author['username'] ?? '', ENT_QUOTES, 'UTF-8');
+    $authorPath = rawurlencode($author['username'] ?? '');
+
     return "
         <article
             class='report-content'
-            id='post-{$post['id']}'
+            id='post-{$postId}'
         >
             <h2 class='report-heading'>
                 Denúncia de Postagem
             </h2>
-                class='report-card'
-                href='/post/{$post['id']}'
+            <a class='report-card'
+                href='/post/{$postId}'
             >
 
                 <div class='report-body'>
                     <h3 class='report-title'>
-                        {$post['title']}
+                        {$title}
                     </h3>
                     <img
                         class='report-image'
-                        src='{$post['image']}'
-                        alt='{$post['title']}'
+                        src='{$image}'
+                        alt='{$title}'
                     >
                     <p class='report-description'>
-                        {$post['body']}
+                        {$body}
                     </p>
                 </div>
             </a>
@@ -163,53 +184,56 @@ function reportPost($post, $author)
                 <div class='report-author'>
                     <img
                         class='report-author-image'
-                        src='{$author['image_url']}'
-                        alt='{$author['username']}'
+                        src='{$authorImage}'
+                        alt='{$authorName}'
                     >
-                        href='/user/{$author['id']}'
+                    <a href='/user/{$authorPath}'
                         class='report-author-name'
                     >
-                        {$author['username']}
+                        {$authorName}
                     </a>
                 </div>
             </div>
-            " . renderReportForm('post', $post['id']) . "
+            " . renderReportForm('post', $postId) . "
         </article>
     ";
 }
 
 function reportUser($user)
 {
-    $bio = $user['bio'] ?? 'Este usuário não possui biografia.';
-    $imageUrl = $user['image_url'] ?? '/assets/img/default-avatar.png';
+    $userId = (int) ($user['id'] ?? 0);
+    $username = htmlspecialchars($user['username'] ?? '', ENT_QUOTES, 'UTF-8');
+    $usernamePath = rawurlencode($user['username'] ?? '');
+    $bio = nl2br(htmlspecialchars($user['bio'] ?? 'Este usuário não possui biografia.', ENT_QUOTES, 'UTF-8'));
+    $imageUrl = htmlspecialchars($user['image_url'] ?? '/assets/img/default-avatar.png', ENT_QUOTES, 'UTF-8');
 
     return "
         <article
             class='report-content'
-            id='user-{$user['id']}'
+            id='user-{$userId}'
         >
             <h2 class='report-heading'>
                 Denúncia de Usuário
             </h2>
                 <a
                     class='report-card'
-                    href='/user/{$user['username']}'
+                    href='/user/{$usernamePath}'
                 >
                 <div class='report-body'>
                     <img
                         class='report-image report-user-image'
                         src='{$imageUrl}'
-                        alt='{$user['username']}'
+                        alt='{$username}'
                     >
                     <h3 class='report-title'>
-                        {$user['username']}
+                        {$username}
                     </h3>
                     <p class='report-description'>
                         {$bio}
                     </p>
                 </div>
             </a>
-            " . renderReportForm('user', $user['id'], [
+            " . renderReportForm('user', $userId, [
             'fake-profile' => 'Perfil Falso / Falsidade Ideológica',
             'harassment' => 'Assédio / Perseguição',
         ]) . "
@@ -218,6 +242,7 @@ function reportUser($user)
     ";
 }
 
+echo '<body>';
 echo renderHeader($navItems);
 if ($type === 'material') {
     echo reportMaterial($material, $author);
@@ -228,3 +253,4 @@ if ($type === 'material') {
 }
 echo renderFooter();
 echo renderVLibras();
+echo '</body></html>';

@@ -36,65 +36,54 @@
 
                 <img class="userprofile__avatar"
                     src="<?= htmlspecialchars($user['image_url'] ?? '/assets/img/default-avatar.png') ?>" alt="Avatar">
-
                 <h1 class="userprofile__name">
                     <?= htmlspecialchars($user['name']) ?>
                 </h1>
-
                 <p class="userprofile__username">
                     @<?= htmlspecialchars($user['username']) ?>
                 </p>
-
                 <div class="userprofile__badges">
-                    <span class="userprofile__badge userprofile__badge--<?= $user['role'] ?>">
-                        <?= strtoupper($user['role']) ?>
+                    <span class="userprofile__badge userprofile__badge--<?= htmlspecialchars($user['role'], ENT_QUOTES, 'UTF-8') ?>">
+                        <?= htmlspecialchars(strtoupper($user['role']), ENT_QUOTES, 'UTF-8') ?>
                     </span>
-
                     <span
                         class="userprofile__badge <?= $user['active'] ? 'userprofile__badge--active' : 'userprofile__badge--inactive' ?>">
                         <?= $user['active'] ? 'ATIVO' : 'INATIVO' ?>
                     </span>
                 </div>
-
             </div>
 
             <div class="userprofile__body">
-
                 <div class="userprofile__field">
                     <span class="userprofile__label">Email</span>
                     <span class="userprofile__value"><?= htmlspecialchars($user['email']) ?></span>
                 </div>
-
                 <div class="userprofile__field">
                     <span class="userprofile__label">Bio</span>
                     <span class="userprofile__value">
                         <?= nl2br(htmlspecialchars($user['bio'] ?? 'Sem bio ainda')) ?>
                     </span>
                 </div>
-
                 <div class="userprofile__field">
                     <span class="userprofile__label">Criado em</span>
-                    <span class="userprofile__value"><?= $user['created_at'] ?></span>
+                    <span class="userprofile__value"><?= htmlspecialchars($user['created_at'], ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
-
                 <?php if (!empty($user['disabled_at'])): ?>
                     <div class="userprofile__field">
                         <span class="userprofile__label">Desativado em</span>
-                        <span class="userprofile__value"><?= $user['disabled_at'] ?></span>
+                        <span class="userprofile__value"><?= htmlspecialchars($user['disabled_at'], ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
                 <?php endif; ?>
-
             </div>
             <div class="userprofile__report">
-                <a href="/report/user/<?= htmlspecialchars($user['username']) ?>" class="userprofile__report-link">
+                <a href="/report/user/<?= rawurlencode($user['username']) ?>" class="userprofile__report-link">
                     Denunciar usuário
                 </a>
             </div>
-
         </section>
-
     </main>
-
     <?= renderFooter() ?>
     <?= renderVLibras() ?>
 <?php endif; ?>
+</body>
+</html>
