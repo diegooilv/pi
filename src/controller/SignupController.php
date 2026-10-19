@@ -32,17 +32,29 @@ class SignupController extends Controller
             exit;
         }
 
-        $mime = mime_content_type($_FILES['image']['tmp_name']);
-        $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+        $image = $_FILES['image'] ?? null;
+        $image_url = null;
 
-        if (!in_array($mime, $allowed)) {
-            return;
+        if ($image && ($image['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+            if (($image['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+                header('Location: /signup');
+                exit;
+            }
+
+            $mime = mime_content_type($image['tmp_name']);
+            $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+
+            if (!in_array($mime, $allowed, true)) {
+                header('Location: /signup');
+                exit;
+            }
+
+            $image_url = $this->cloudinaryService->upload($image['tmp_name']);
         }
 
         $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $image_url = $this->cloudinaryService->upload($_FILES['image']['tmp_name']);
 
-        $this->authService->signup(
+        $created = $this->authService->signup(
             $name,
             $username,
             $email,
@@ -50,6 +62,9 @@ class SignupController extends Controller
             $bio,
             $image_url
         );
+
+        header('Location: ' . ($created ? '/profile' : '/signup'));
+        exit;
     }
 
     public function signup()
