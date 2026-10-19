@@ -13,6 +13,7 @@ class DashboardController extends Controller
     }
     public function index()
     {
+        $this->authService->requireLogin();
         $navItems = $this->navService->getHeaderItems('dashboard');
 
         $user = [

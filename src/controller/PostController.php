@@ -43,6 +43,7 @@ class PostController extends Controller
 
     public function createForm()
     {
+        $this->authService->requireLogin();
         CsrfService::check();
 
         $errors = [];
@@ -143,8 +144,7 @@ class PostController extends Controller
         $this->postService->updatePost($id, [
             'title' => $_POST['title'],
             'body' => $_POST['body'],
-            'image' => $_FILES['image'] ?? null,
-        ]);
+        ], $_FILES['image'] ?? null);
 
         header('Location: /post/' . $id);
         exit;

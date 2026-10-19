@@ -27,6 +27,7 @@ class ChatBotController extends Controller
 
     public function perguntar(): void
     {
+        CsrfService::check();
         $pergunta = trim($_POST['prompt'] ?? '');
 
         if (empty($pergunta)) {
