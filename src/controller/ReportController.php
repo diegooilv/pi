@@ -30,6 +30,12 @@ class ReportController extends Controller
         $type = 'post';
 
         $post = $this->reportService->getPost($id);
+        if (!$post) {
+            http_response_code(404);
+            $this->view('404', compact('navItems'));
+            return;
+        }
+
         $author = $this->reportService->getAuthor(
             $post['author_id']
         );
@@ -47,6 +53,11 @@ class ReportController extends Controller
 
         $type = 'user';
         $user = $this->userService->getUserByUsername($username);
+        if (!$user) {
+            http_response_code(404);
+            $this->view('404', compact('navItems'));
+            return;
+        }
 
         $this->view(
             'report',
