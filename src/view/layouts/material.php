@@ -70,15 +70,15 @@ function renderMaterial($materialView)
     $material = $materialView->getMaterial();
     $author = $materialView->getAuthor();
 
-    $url = $material->getUrl();
-    $materialId = (int) $material->getId();
-    $title = htmlspecialchars($material->getTitle(), ENT_QUOTES, 'UTF-8');
-    $imageUrl = htmlspecialchars($material->getImageUrl(), ENT_QUOTES, 'UTF-8');
-    $description = nl2br(htmlspecialchars($material->getDescription(), ENT_QUOTES, 'UTF-8'));
+    $url = $material['url'] ?? '';
+    $materialId = (int) ($material['id'] ?? 0);
+    $title = htmlspecialchars($material['title'] ?? '', ENT_QUOTES, 'UTF-8');
+    $imageUrl = htmlspecialchars($material['image'] ?? '', ENT_QUOTES, 'UTF-8');
+    $description = nl2br(htmlspecialchars($material['description'] ?? '', ENT_QUOTES, 'UTF-8'));
     $safeUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
-    $authorId = (int) $author->getId();
-    $authorImage = htmlspecialchars($author->getImageUrl(), ENT_QUOTES, 'UTF-8');
-    $authorUsername = htmlspecialchars($author->getUsername(), ENT_QUOTES, 'UTF-8');
+    $authorImage = htmlspecialchars($author['image_url'] ?? '', ENT_QUOTES, 'UTF-8');
+    $authorUsername = htmlspecialchars($author['username'] ?? '', ENT_QUOTES, 'UTF-8');
+    $authorPath = rawurlencode($author['username'] ?? '');
 
     $extension = strtolower(
         pathinfo(
@@ -101,11 +101,11 @@ function renderMaterial($materialView)
 
                 <h2 class='material-title'>{$title}</h2>
 
-                <img
+                " . ($imageUrl !== '' ? "<img
                     class='material-banner'
                     src='{$imageUrl}'
                     alt='{$title}'
-                >
+                >" : '') . "
 
                 <p class='material-description'>
                     {$description}
@@ -119,7 +119,7 @@ function renderMaterial($materialView)
 
             <div class='material-links'>
 
-                <a
+                " . ($safeUrl !== '' ? "<a
                     class='material-link'
                     href='{$safeUrl}'
                     target='_blank'
@@ -127,7 +127,8 @@ function renderMaterial($materialView)
                     title='Abrir material'
                 >
                     {$icon}
-                </a>
+                    <span>Abrir material</span>
+                </a>" : '') . "
 
             </div>
 
@@ -140,7 +141,7 @@ function renderMaterial($materialView)
                 >
 
                 <a
-                    href='/user/{$authorId}'
+                    href='/user/{$authorPath}'
                     class='material-author-name'
                 >
                     {$authorUsername}
