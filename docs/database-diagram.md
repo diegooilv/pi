@@ -9,6 +9,7 @@ erDiagram
     Post }o--|| User : references
     Post }o--|| Category : references
     Material }o--|| User : references
+    Material }o--|| Category : references
 
     User {
         INTEGER id PK
@@ -20,13 +21,13 @@ erDiagram
         ENUM role
         BOOLEAN active
         TIMESTAMP created_at
-        DATETIME deleted_at
+        DATETIME disabled_at
     }
 
     SessionToken {
         INTEGER id PK
         INTEGER user_id FK
-        VARCHAR(255) token
+        CHAR(64) token_hash
         TIMESTAMP expires_at
         TIMESTAMP created_at
     }
@@ -34,7 +35,7 @@ erDiagram
     ResetToken {
         INTEGER id PK
         INTEGER user_id FK
-        VARCHAR(255) token
+        CHAR(64) token_hash
         TIMESTAMP expires_at
         BOOLEAN used
         TIMESTAMP created_at
@@ -72,12 +73,14 @@ erDiagram
         ENUM type
         VARCHAR(500) url
         INTEGER author_id FK
+        INTEGER category_id FK
         TIMESTAMP created_at
         DATETIME deleted_at
     }
 ```
 
 ---
+
 Imagem:
 
 ![Diagrama MySql](../assets/Diagram.png)

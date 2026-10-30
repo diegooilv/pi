@@ -1,4 +1,4 @@
-# Diagrama - Noesis
+# Banco de dados — Noesis
 
 ## Sumário
 
@@ -33,18 +33,20 @@
 
 ### User
 
-| Nome              | Tipo         | Configurações                    | Referências | Nota |
-| ----------------- | ------------ | -------------------------------- | ----------- | ---- |
-| **id**            | INTEGER      | 🔑 PK, not null, autoincrement   |             |      |
-| **name**          | VARCHAR(100) | not null                         |             |      |
-| **username**      | VARCHAR(50)  | not null, unique                 |             |      |
-| **email**         | VARCHAR(150) | not null, unique                 |             |      |
-| **password_hash** | VARCHAR(255) | not null                         |             |      |
-| **bio**           | TEXT         | null                             |             |      |
-| **role**          | ENUM         | not null, default: user          |             |      |
-| **active**        | BOOLEAN      | not null, default: true          |             |      |
-| **created_at**    | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |         |      |
-| **deleted_at**    | DATETIME     | null, default: NULL              |             |      |
+| Nome              | Tipo         | Configurações                        | Referências | Nota |
+| ----------------- | ------------ | ------------------------------------ | ----------- | ---- |
+| **id**            | INTEGER      | 🔑 PK, not null, autoincrement       |             |      |
+| **name**          | VARCHAR(100) | not null                             |             |      |
+| **username**      | VARCHAR(50)  | not null, unique                     |             |      |
+| **email**         | VARCHAR(150) | not null, unique                     |             |      |
+| **password_hash** | VARCHAR(255) | not null                             |             |      |
+| **bio**           | TEXT         | null                                 |             |      |
+| **image_url**     | VARCHAR(500) | null                                 |             |      |
+| **role**          | ENUM         | not null, default: user              |             |      |
+| **active**        | BOOLEAN      | not null, default: true              |             |      |
+| **created_at**    | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |             |      |
+| **updated_at**    | TIMESTAMP    | not null, atualizado automaticamente |             |      |
+| **disabled_at**   | DATETIME     | null, default: NULL                  |             |      |
 
 #### Enums
 
@@ -55,24 +57,24 @@
 
 ### SessionToken
 
-| Nome           | Tipo         | Configurações                        | Referências                  | Nota |
-| -------------- | ------------ | ------------------------------------ | ---------------------------- | ---- |
-| **id**         | INTEGER      | 🔑 PK, not null, autoincrement       |                              |      |
-| **user_id**    | INTEGER      | not null                             | fk_SessionToken_user_id_User |      |
-| **token**      | VARCHAR(255) | not null                             |                              |      |
-| **expires_at** | TIMESTAMP    | not null                             |                              |      |
-| **created_at** | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |                              |      |
+| Nome           | Tipo      | Configurações                        | Referências                  | Nota |
+| -------------- | --------- | ------------------------------------ | ---------------------------- | ---- |
+| **id**         | INTEGER   | 🔑 PK, not null, autoincrement       |                              |      |
+| **user_id**    | INTEGER   | not null                             | fk_SessionToken_user_id_User |      |
+| **token_hash** | CHAR(64)  | not null, unique                     |                              |      |
+| **expires_at** | TIMESTAMP | not null                             |                              |      |
+| **created_at** | TIMESTAMP | not null, default: CURRENT_TIMESTAMP |                              |      |
 
 ### ResetToken
 
-| Nome           | Tipo         | Configurações                        | Referências                | Nota |
-| -------------- | ------------ | ------------------------------------ | -------------------------- | ---- |
-| **id**         | INTEGER      | 🔑 PK, not null, autoincrement       |                            |      |
-| **user_id**    | INTEGER      | not null                             | fk_ResetToken_user_id_User |      |
-| **token**      | VARCHAR(255) | not null                             |                            |      |
-| **expires_at** | TIMESTAMP    | not null                             |                            |      |
-| **used**       | BOOLEAN      | not null, default: false             |                            |      |
-| **created_at** | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |                            |      |
+| Nome           | Tipo      | Configurações                        | Referências                | Nota |
+| -------------- | --------- | ------------------------------------ | -------------------------- | ---- |
+| **id**         | INTEGER   | 🔑 PK, not null, autoincrement       |                            |      |
+| **user_id**    | INTEGER   | not null                             | fk_ResetToken_user_id_User |      |
+| **token_hash** | CHAR(64)  | not null, unique                     |                            |      |
+| **expires_at** | TIMESTAMP | not null                             |                            |      |
+| **used**       | BOOLEAN   | not null, default: false             |                            |      |
+| **created_at** | TIMESTAMP | not null, default: CURRENT_TIMESTAMP |                            |      |
 
 ### Category
 
@@ -85,10 +87,10 @@
 
 Chave primária composta: (`user_id`, `category_id`) — impede que o mesmo usuário adicione a mesma categoria duas vezes.
 
-| Nome            | Tipo    | Configurações        | Referências                        | Nota |
-| --------------- | ------- | -------------------- | ---------------------------------- | ---- |
-| **user_id**     | INTEGER | 🔑 PK (composta), not null | fk_Preference_user_id_User   |      |
-| **category_id** | INTEGER | 🔑 PK (composta), not null | fk_Preference_category_id_Category | |
+| Nome            | Tipo    | Configurações              | Referências                        | Nota |
+| --------------- | ------- | -------------------------- | ---------------------------------- | ---- |
+| **user_id**     | INTEGER | 🔑 PK (composta), not null | fk_Preference_user_id_User         |      |
+| **category_id** | INTEGER | 🔑 PK (composta), not null | fk_Preference_category_id_Category |      |
 
 ### Post
 
@@ -115,17 +117,19 @@ Chave primária composta: (`user_id`, `category_id`) — impede que o mesmo usu�
 
 ### Material
 
-| Nome            | Tipo         | Configurações                        | Referências                | Nota |
-| --------------- | ------------ | ------------------------------------ | -------------------------- | ---- |
-| **id**          | INTEGER      | 🔑 PK, not null, autoincrement       |                            |      |
-| **title**       | VARCHAR(255) | not null                             |                            |      |
-| **description** | TEXT         | null                                 |                            |      |
-| **image**       | VARCHAR(500) | null                                 |                            |      |
-| **type**        | ENUM         | not null                             |                            |      |
-| **url**         | VARCHAR(500) | null                                 |                            |      |
-| **author_id**   | INTEGER      | not null                             | fk_Material_author_id_User |      |
-| **created_at**  | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |                            |      |
-| **deleted_at**  | DATETIME     | null, default: NULL                  |                            |      |
+| Nome            | Tipo         | Configurações                        | Referências                      | Nota |
+| --------------- | ------------ | ------------------------------------ | -------------------------------- | ---- |
+| **id**          | INTEGER      | 🔑 PK, not null, autoincrement       |                                  |      |
+| **title**       | VARCHAR(255) | not null                             |                                  |      |
+| **description** | TEXT         | null                                 |                                  |      |
+| **image**       | VARCHAR(500) | null                                 |                                  |      |
+| **type**        | ENUM         | not null                             |                                  |      |
+| **url**         | VARCHAR(500) | null                                 |                                  |      |
+| **author_id**   | INTEGER      | not null                             | fk_Material_author_id_User       |      |
+| **category_id** | INTEGER      | not null                             | fk_Material_category_id_Category |      |
+| **created_at**  | TIMESTAMP    | not null, default: CURRENT_TIMESTAMP |                                  |      |
+| **updated_at**  | TIMESTAMP    | not null, atualizado automaticamente |                                  |      |
+| **deleted_at**  | DATETIME     | null, default: NULL                  |                                  |      |
 
 #### Enums
 
@@ -144,6 +148,9 @@ Chave primária composta: (`user_id`, `category_id`) — impede que o mesmo usu�
 - **Post para User**: muitos_para_um
 - **Post para Category**: muitos_para_um
 - **Material para User**: muitos_para_um
+- **Material para Category**: muitos_para_um
+
+O schema também contém as tabelas `reports_posts`, `reports_materials`, `suggestions` e `contacts`. Consulte `database/init.sql` para a definição integral vigente.
 
 ## Diagrama do banco
 
@@ -156,6 +163,7 @@ erDiagram
     Post }o--|| User : references
     Post }o--|| Category : references
     Material }o--|| User : references
+    Material }o--|| Category : references
 
     User {
         INTEGER id PK
@@ -167,13 +175,13 @@ erDiagram
         ENUM role
         BOOLEAN active
         TIMESTAMP created_at
-        DATETIME deleted_at
+        DATETIME disabled_at
     }
 
     SessionToken {
         INTEGER id PK
         INTEGER user_id FK
-        VARCHAR(255) token
+        CHAR(64) token_hash
         TIMESTAMP expires_at
         TIMESTAMP created_at
     }
@@ -181,7 +189,7 @@ erDiagram
     ResetToken {
         INTEGER id PK
         INTEGER user_id FK
-        VARCHAR(255) token
+        CHAR(64) token_hash
         TIMESTAMP expires_at
         BOOLEAN used
         TIMESTAMP created_at
@@ -219,6 +227,7 @@ erDiagram
         ENUM type
         VARCHAR(500) url
         INTEGER author_id FK
+        INTEGER category_id FK
         TIMESTAMP created_at
         DATETIME deleted_at
     }
