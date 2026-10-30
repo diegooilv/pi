@@ -26,11 +26,14 @@ class RecaptchaService
         $response = curl_exec($ch);
 
         if ($response === false) {
+            curl_close($ch);
             return false;
         }
 
+        curl_close($ch);
+
         $data = json_decode($response, true);
 
-        return $data['success'] ?? false;
+        return is_array($data) && ($data['success'] ?? false) === true;
     }
 }

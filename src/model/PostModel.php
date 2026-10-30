@@ -124,12 +124,21 @@ class PostModel
 
     public function update($id, $data)
     {
+        $allowedColumns = ['title', 'body', 'image', 'reading_time', 'status', 'category_id'];
         $fields = [];
         $values = [];
 
         foreach ($data as $column => $value) {
+            if (!in_array($column, $allowedColumns, true)) {
+                throw new InvalidArgumentException('Invalid post column.');
+            }
+
             $fields[] = "{$column} = ?";
             $values[] = $value;
+        }
+
+        if ($fields === []) {
+            throw new InvalidArgumentException('No post data to update.');
         }
 
         $values[] = $id;
@@ -218,20 +227,6 @@ class PostModel
 
     public function editPost($id, $data)
     {
-        $fields = [];
-        $values = [];
-
-        foreach ($data as $column => $value) {
-            $fields[] = "{$column} = ?";
-            $values[] = $value;
-        }
-
-        $values[] = $id;
-
-        $sql = "UPDATE posts SET " . implode(', ', $fields) . " WHERE id = ?";
-
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute($values);
+        return $this->update($id, $data);
     }
 }

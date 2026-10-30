@@ -8,6 +8,7 @@
     <title>Noesis - Usuario</title>
 </head>
 
+<body>
 <?= renderHeader($navItems) ?>
 <?php if (!$user): ?>
     <main class="userprofile userprofile--empty">
@@ -29,11 +30,8 @@
 <?php else: ?>
 
     <main class="userprofile">
-
         <section class="userprofile__card">
-
             <div class="userprofile__header">
-
                 <img class="userprofile__avatar"
                     src="<?= htmlspecialchars($user['image_url'] ?? '/assets/img/default-avatar.png') ?>" alt="Avatar">
                 <h1 class="userprofile__name">

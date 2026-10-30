@@ -64,12 +64,21 @@ class UserModel
 
     public function update($id, $data)
     {
+        $allowedColumns = ['name', 'username', 'email', 'password_hash', 'bio', 'image_url'];
         $fields = [];
         $values = [];
 
         foreach ($data as $column => $value) {
+            if (!in_array($column, $allowedColumns, true)) {
+                throw new InvalidArgumentException('Invalid user column.');
+            }
+
             $fields[] = "{$column} = ?";
             $values[] = $value;
+        }
+
+        if ($fields === []) {
+            throw new InvalidArgumentException('No user data to update.');
         }
 
         $values[] = $id;
@@ -94,7 +103,7 @@ class UserModel
         if ($active) {
             $stmt = $this->pdo->prepare(
                 'UPDATE users
-                 SET active = ?, deleted_at = NULL
+                 SET active = ?, disabled_at = NULL
                  WHERE id = ?'
             );
 
