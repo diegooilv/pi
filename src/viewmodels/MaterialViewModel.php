@@ -3,8 +3,8 @@
 class MaterialViewModel
 {
     public function __construct(
-        private MaterialModel $material,
-        private UserModel $author,
+        private array $material,
+        private array $author,
     ) {
     }
 

@@ -30,6 +30,15 @@ $router->post('/post/create', [PostController::class, 'createForm']);
 $router->get('/post/{id}', [PostController::class, 'post']);
 $router->get('/post/{id}/edit', [PostController::class, 'editPost']);
 $router->post('/post/{id}/edit', [PostController::class, 'editPostForm']);
+
+$router->get('/materials', [MaterialController::class, 'index']);
+$router->get('/materials/create', [MaterialController::class, 'create']);
+$router->get('/material/create', [MaterialController::class, 'create']);
+$router->post('/material/create', [MaterialController::class, 'createForm']);
+$router->get('/material/{id}', [MaterialController::class, 'material']);
+$router->get('/material/{id}/edit', [MaterialController::class, 'edit']);
+$router->post('/material/{id}/edit', [MaterialController::class, 'editForm']);
+
 $router->get('/profile', [ProfileController::class, 'index']);
 
 $router->get('/logout', [LogoutController::class, 'index']);

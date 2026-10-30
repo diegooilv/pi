@@ -1,4 +1,4 @@
-.material {
+﻿.material {
     background: var(--surface);
     border-radius: 16px;
     overflow: hidden;
@@ -60,7 +60,13 @@
     color: var(--accent);
     text-decoration: none;
     font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
 }
+
+.material-open-btn { display: inline-flex; margin-top: 1.5rem; padding: .7rem 1.1rem; border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); font-family: var(--font-alt); transition: background .2s, color .2s; }
+.material-open-btn:hover { background: var(--accent); color: var(--primary); }
 
 .material-link:hover {
     text-decoration: underline;

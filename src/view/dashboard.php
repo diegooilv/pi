@@ -51,7 +51,7 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                 <ul class="dashboard-list">
                     <?php foreach ($postsLimit as $post): ?>
                         <li class="dashboard-list__item">
-                            <a class="dashboard-list__link" href="/posts/<?= e($post['id']) ?>">
+                            <a class="dashboard-list__link" href="/post/<?= e($post['id']) ?>">
                                 <?php if (!empty($post['image'])): ?>
                                     <img class="dashboard-list__image" src="<?= e($post['image']) ?>"
                                         alt="<?= e($post['title'] ?? '') ?>">
@@ -99,7 +99,7 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                 <ul class="dashboard-list">
                     <?php foreach ($materialsLimit as $material): ?>
                         <li class="dashboard-list__item">
-                            <a class="dashboard-list__link" href="/materials/<?= e($material['id']) ?>">
+                            <a class="dashboard-list__link" href="/material/<?= e($material['id']) ?>">
                                 <?php if (has($material, 'image')): ?>
                                     <img class="dashboard-list__image" src="<?= e($material['image']) ?>"
                                         alt="<?= e($material['title'] ?? '') ?>">
@@ -108,12 +108,13 @@ $userName = $user['name'] ?? $user['username'] ?? 'Usuário';
                                 <div class="dashboard-list__content">
                                     <h3 class="dashboard-list__title"><?= e($material['title'] ?? 'Sem título') ?></h3>
 
-                                    <?php if (has($material, 'excerpt')): ?>
-                                        <p class="dashboard-list__excerpt"><?= e($material['excerpt']) ?></p>
+                                    <?php if (has($material, 'description')): ?>
+                                        <p class="dashboard-list__excerpt">
+                                            <?= e(mb_strimwidth(strip_tags($material['description']), 0, 150, '...')) ?></p>
                                     <?php endif; ?>
 
-                                    <?php if (has($material, 'date')): ?>
-                                        <span class="dashboard-list__date"><?= e($material['date']) ?></span>
+                                    <?php if (has($material, 'created_at')): ?>
+                                        <span class="dashboard-list__date"><?= e($material['created_at']) ?></span>
                                     <?php endif; ?>
                                 </div>
                             </a>

@@ -30,7 +30,7 @@ CREATE TABLE
     session_tokens (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         user_id INT UNSIGNED NOT NULL,
-        token_hash CHAR(64) NOT NULL, 
+        token_hash CHAR(64) NOT NULL,
         expires_at TIMESTAMP NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         UNIQUE KEY uq_session_token_hash (token_hash),
@@ -42,7 +42,7 @@ CREATE TABLE
     reset_tokens (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         user_id INT UNSIGNED NOT NULL,
-        token_hash CHAR(64) NOT NULL, 
+        token_hash CHAR(64) NOT NULL,
         expires_at TIMESTAMP NOT NULL,
         used BOOLEAN NOT NULL DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -152,4 +152,17 @@ CREATE TABLE
         KEY idx_contacts_email (email)
     );
 
---- Vai ser adicionado seed futuramente.
+--- Seed
+INSERT INTO
+    categories (id, name)
+VALUES
+    (1, 'Filosofia Antiga'),
+    (2, 'Filosofia Medieval'),
+    (3, 'Filosofia Moderna'),
+    (4, 'Filosofia Contemporânea'),
+    (5, 'Ética'),
+    (6, 'Lógica'),
+    (7, 'Epistemologia'),
+    (8, 'Estética'),
+    (9, 'Política'),
+    (10, 'Metafísica');

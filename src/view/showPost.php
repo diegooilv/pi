@@ -31,7 +31,7 @@
                     <span class="post-author">
                         <span class="post-meta__label">por</span>
                         <?php if (!empty($post['author_id'])): ?>
-                            <a href="/user/<?= $post['author_username']; ?>" class="post-author__link">
+                            <a href="/user/<?= rawurlencode($post['author_username'] ?? '') ?>" class="post-author__link">
                                 <strong><?= htmlspecialchars($post['author_name'] ?? 'Autor desconhecido') ?></strong>
                             </a>
                         <?php else: ?>
@@ -55,8 +55,10 @@
                     </a>
 
                     <?php if (
-                        (int) $post['author_id'] === (int) $_SESSION['auth']['id'] ||
-                        $_SESSION['auth']['role'] === 'admin'
+                        isset($_SESSION['auth']) && (
+                            (int) $post['author_id'] === (int) ($_SESSION['auth']['id'] ?? 0) ||
+                            ($_SESSION['auth']['role'] ?? '') === 'admin'
+                        )
                     ): ?>
                         <a href="/post/<?= (int) $post['id'] ?>/edit" class="post-edit-btn">
                             Editar post

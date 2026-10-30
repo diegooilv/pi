@@ -4,12 +4,14 @@ class DashboardController extends Controller
     private AuthService $authService;
     private NavigationService $navService;
     private PostService $postService;
+    private MaterialService $materialService;
 
     public function __construct()
     {
         $this->authService = new AuthService();
         $this->navService = new NavigationService();
         $this->postService = new PostService();
+        $this->materialService = new MaterialService();
     }
     public function index()
     {
@@ -68,6 +70,7 @@ class DashboardController extends Controller
             ],
         ];
 
+        $materials = $this->materialService->getMaterialsByAuthorId((int) $_SESSION['auth']['id'], 100);
         $this->view('dashboard', compact('navItems', 'user', 'posts', 'materials'));
     }
 }
